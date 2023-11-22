@@ -23,7 +23,7 @@ const registrarOcorrencia = async (req, res) => {
 
     await serviceOcorrencia.salvar(novaOcorrencia)
     req.flash('sucesso_mensagem','Ocorrência salva com sucesso no banco de dados')
-    res.redirect('/assaltos/')
+    res.redirect('/ocorrencias/')
 }
 
 const exibirMapa = (req, res) => {
@@ -58,7 +58,7 @@ const deletar = async (req, res) => {
 
     await serviceOcorrencia.deletar(ocorrencia)
     
-    res.redirect('/assaltos/')
+    res.redirect('/ocorrencias/')
 }
 
 const formEdicao = async (req, res) => {
@@ -79,7 +79,7 @@ const atualizar = async (req, res) => {
     await serviceOcorrencia.atualizar(id, atributos)
     
     req.flash('sucesso_mensagem','Atualização feita com sucesso no banco de dados')
-    res.redirect('/assaltos/')
+    res.redirect('/ocorrencias/')
 }
 
 const mostrarCharts = (req, res) => res.render('ocorrencias/charts')

@@ -37,6 +37,6 @@ app.use(methodOverride('X­HTTP­Method­Override'));
 app.use(methodOverride('X­Method­Override'));
 app.use(methodOverride('_method', {methods: ['GET', 'POST']}))
 
-app.use('/assaltos', router)
+app.use('/ocorrencias', router)
 
 app.listen(PORTA, () => console.log(`APP ouvindo na porta ${PORTA}...`))

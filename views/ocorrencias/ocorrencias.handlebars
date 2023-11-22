@@ -22,9 +22,9 @@
                         <td scope="row">{{titulo}}</td>
                         <td>{{tipo}}</td>
                         <td>{{data}}</td>
-                        <td><a class="btn btn-primary" href="/assaltos/local/{{id}}">Visualizar</a></td>
-                        <td> <a class="btn btn-danger" href="/assaltos/deletar/{{id}}?_method=DELETE" role="button">Excluir</a> </td>
-                        <td> <a class="btn btn-success" href="/assaltos/edicao/{{id}}" role="button">Editar</a> </td>
+                        <td><a class="btn btn-primary" href="/ocorrencias/local/{{id}}">Visualizar</a></td>
+                        <td> <a class="btn btn-danger" href="/ocorrencias/deletar/{{id}}?_method=DELETE" role="button">Excluir</a> </td>
+                        <td> <a class="btn btn-success" href="/ocorrencias/edicao/{{id}}" role="button">Editar</a> </td>
                     </tr>
                 {{else}}
                     <h3>Nenhuma ocorrência registrada ainda no sistema...</h3>
@@ -36,5 +36,5 @@
     </table>
 </div>
 <div class="container">
-    <a name="nova-ocorrencia" id="nova-ocorrencia" class="btn btn-success" href="/assaltos/mapa" role="button">Nova Ocorrência</a>    
+    <a name="nova-ocorrencia" id="nova-ocorrencia" class="btn btn-success" href="/ocorrencias/mapa" role="button">Nova Ocorrência</a>    
 </div>
