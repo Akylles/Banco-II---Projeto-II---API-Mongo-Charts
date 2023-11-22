@@ -1,3 +1,4 @@
+import mongoose from "mongoose"
 import serviceOcorrencia from "../services/ocorrencia.service.js"
 
 const validaForm = (req, res, next) => {
@@ -40,6 +41,30 @@ const validaForm = (req, res, next) => {
     }
 }
 
+const validaID = (req, res, next) => {
+    const id = req.params.id
+
+    if (mongoose.Types.ObjectId.isValid(id)) {
+        req.id = id
+        next()
+    } else {
+        res.status(400).send({ error: "ERRO: Id inválido" })
+    }
+}
+
+const validaOcorrencia = async (req, res, next) => {
+    const id = req.params.id
+
+    const ocorrencia = await serviceOcorrencia.buscarPorId(id)
+    
+    if (ocorrencia) {
+        req.ocorrencia = ocorrencia
+        next()
+    } else {
+        res.status(400).send({ error: "ERRO: Ocorrência não encontrada" })
+    }
+}
+
 const temOcorrenciaCadastrada = async (req, res, next) => {
     const listaOcorrencias = await serviceOcorrencia.buscarTodos()
 
@@ -50,6 +75,6 @@ const temOcorrenciaCadastrada = async (req, res, next) => {
     }
 }
 
-const middlewareGlobal = {validaForm, temOcorrenciaCadastrada}
+const middlewareGlobal = {validaForm, temOcorrenciaCadastrada, validaID, validaOcorrencia}
 
 export default middlewareGlobal

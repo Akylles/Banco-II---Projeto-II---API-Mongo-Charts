@@ -53,12 +53,44 @@ const visualizarLocalizacao = async (req, res) => {
     res.render('mapa/local', ocorrencia)
 }
 
+const deletar = async (req, res) => {
+    const ocorrencia = req.ocorrencia
+
+    await serviceOcorrencia.deletar(ocorrencia)
+    
+    res.redirect('/assaltos/')
+}
+
+const formEdicao = async (req, res) => {
+    const id = req.params.id
+
+    res.render('ocorrencias/editForm', {id: id})
+}
+
+const atualizar = async (req, res) => {
+    const id = req.params.id
+
+    const atributos = {
+        titulo: req.body.titulo,
+        tipo: req.body.tipo,
+        data: req.body.data
+    }
+
+    await serviceOcorrencia.atualizar(id, atributos)
+    
+    req.flash('sucesso_mensagem','Atualização feita com sucesso no banco de dados')
+    res.redirect('/assaltos/')
+}
+
 const controllerOcorrencia = {
     visualizarLocalizacao,
     registrarOcorrencia,
     mostrarOcorrencias,
     exibirMapa,
-    renderizarFormulario
+    renderizarFormulario,
+    deletar,
+    formEdicao,
+    atualizar
 }
 
 export default controllerOcorrencia

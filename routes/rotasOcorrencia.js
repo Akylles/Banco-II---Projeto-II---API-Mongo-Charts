@@ -12,6 +12,12 @@ router.get('/form/:lat/:lng', controllerOcorrencia.renderizarFormulario)
 
 router.post('/salvar', middlewareGlobal.validaForm, controllerOcorrencia.registrarOcorrencia)
 
-router.get('/local/:id', controllerOcorrencia.visualizarLocalizacao)
+router.get('/local/:id', middlewareGlobal.validaID, controllerOcorrencia.visualizarLocalizacao)
+
+router.delete('/deletar/:id', middlewareGlobal.validaID, middlewareGlobal.validaOcorrencia, controllerOcorrencia.deletar)
+
+router.get('/edicao/:id', middlewareGlobal.validaID, controllerOcorrencia.formEdicao)
+
+router.patch('/atualizar/:id', controllerOcorrencia.atualizar)
 
 export default router

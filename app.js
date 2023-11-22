@@ -3,6 +3,7 @@ import handlebars from 'express-handlebars'
 import router from './routes/rotasOcorrencia.js'
 import session from 'express-session'
 import flash from 'connect-flash'
+import methodOverride from 'method-override'
 
 const app = express()
 
@@ -30,6 +31,12 @@ app.use((req, res, next)=>{
 const PORTA = 8080
 
 app.use(express.urlencoded({extended: true}))
+
+app.use(methodOverride('X­HTTP­Method'));
+app.use(methodOverride('X­HTTP­Method­Override'));
+app.use(methodOverride('X­Method­Override'));
+app.use(methodOverride('_method', {methods: ['GET', 'POST']}))
+
 app.use('/assaltos', router)
 
 app.listen(PORTA, () => console.log(`APP ouvindo na porta ${PORTA}...`))

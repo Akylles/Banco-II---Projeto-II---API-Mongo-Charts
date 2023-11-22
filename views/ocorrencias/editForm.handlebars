@@ -1,0 +1,27 @@
+
+<div class="container bg-secondary mt-3">
+    <h1 class="bg-info text-dark text-center">Editar dados do assalto</h1>
+  
+    <form method="post" action="/assaltos/atualizar/{{id}}?_method=PATCH">
+        <div class="mb-3">
+          <label for="Titulo" class="form-label">Titulo</label>
+          <input type="text"
+            class="form-control" name="titulo" id="titulo" aria-describedby="helpId" placeholder="Novo título da ocorrência">
+          <small id="helpId" class="form-text text-muted">Digite uma descrição da ocorrência</small>
+        </div>
+        <div class="mb-3 col-3">
+          <label for="tipo" class="form-label">Tipo</label>
+          <input type="text"
+            class="form-control" name="tipo" id="tipo" aria-describedby="helpId" placeholder="Novo tipo">
+          <small id="helpId" class="form-text text-muted">Ex: "assalto", "briga", "estelionato", etc...</small>
+        </div>
+        <div class="mb-3">
+          <label for="data" class="form-label">Data/Hora</label>
+          <input type="datetime-local"
+            class="form-control" name="data" id="data" aria-describedby="helpId" placeholder="">
+          <small id="helpId" class="form-text text-muted">Informe as novas data e a hora da ocorrência</small>
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Salvar edição</button>
+    </form>
+    
+</div>
