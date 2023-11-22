@@ -20,4 +20,6 @@ router.get('/edicao/:id', middlewareGlobal.validaID, controllerOcorrencia.formEd
 
 router.patch('/atualizar/:id', controllerOcorrencia.atualizar)
 
+router.get('/charts', controllerOcorrencia.mostrarCharts)
+
 export default router

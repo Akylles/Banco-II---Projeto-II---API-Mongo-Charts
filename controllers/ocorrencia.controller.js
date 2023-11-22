@@ -82,6 +82,8 @@ const atualizar = async (req, res) => {
     res.redirect('/assaltos/')
 }
 
+const mostrarCharts = (req, res) => res.render('ocorrencias/charts')
+
 const controllerOcorrencia = {
     visualizarLocalizacao,
     registrarOcorrencia,
@@ -90,7 +92,8 @@ const controllerOcorrencia = {
     renderizarFormulario,
     deletar,
     formEdicao,
-    atualizar
+    atualizar,
+    mostrarCharts
 }
 
 export default controllerOcorrencia
