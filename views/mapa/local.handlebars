@@ -1,0 +1,78 @@
+<style>
+    #map {
+    height: 70%;
+    background-color: aqua;
+    }
+    html,
+    body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    }
+</style>
+
+<div class="container text-center row-2">
+    <h1>Local da Ocorrência</h1>
+    <p>
+        <strong>Título: </strong> {{titulo}}, <strong>Tipo: </strong> {{tipo}}<br>
+        <strong>Data e hora da ocorrência: </strong> {{data}} <br>
+    </p>
+</div>
+
+<div class="container" id="map" lat="{{lat}}" lng="{{lng}}">
+    O Mapa deve ser carregado aqui...
+</div>
+
+<script>
+    
+    (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+    ({key: "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg", v: "weekly"});
+
+    let map
+    let marker
+
+    async function initMap() {
+    
+        const { Map } = await google.maps.importLibrary("maps")
+        const {Marker} = await google.maps.importLibrary("marker")
+        
+        const div = document.getElementById("map")
+        const latitude = div.getAttribute('lat')
+        const longitude = div.getAttribute('lng')
+
+        const coordenadas = { lat: Number(latitude), lng: Number(longitude) }
+
+        map = new Map(document.getElementById("map"), {
+            center: coordenadas,
+            zoom: 15,
+        })
+
+        marker = new Marker({
+            position: coordenadas,
+            title: 'Local do Assalto',
+            map: map,
+            draggable: false,
+            animation: google.maps.Animation.DROP,
+            icon: {
+                url: "https://cdn-icons-png.flaticon.com/512/10/10925.png",
+                scaledSize:{width:50, height:50}
+            }
+        })
+
+        marker.addListener('click', () =>{
+            const infowindow = new google.maps.InfoWindow({
+                content: marker.title
+            });
+
+            infowindow.open({
+                anchor: marker,
+                map,
+            });
+        });
+
+    }
+
+    initMap();
+    
+    
+</script>

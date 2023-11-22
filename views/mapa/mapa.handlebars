@@ -1,0 +1,78 @@
+<style>
+    #map {
+    height: 70%;
+    background-color: aqua;
+    }
+    html,
+    body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    }
+</style>
+
+<h1 class="container text-center">Registar Nova Ocorrência</h1>
+<div class="container" id="map">O Mapa deve ser carregado aqui...</div>
+<div class="container mt-3">
+    <a name="salvar-ocorrencia" id="salvar-ocorrencia" class="btn btn-primary" href="#" role="button">Salvar</a>
+</div>
+
+<script>
+    
+    (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+    ({key: "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg", v: "weekly"});
+
+    let map
+    let marker
+
+    async function initMap() {
+    
+        const { Map } = await google.maps.importLibrary("maps")
+        const {Marker} = await google.maps.importLibrary("marker")
+
+        const coordenadasCajazeiras = { lat: -6.89031, lng: -38.55390 }
+
+        map = new Map(document.getElementById("map"), {
+            center: coordenadasCajazeiras,
+            zoom: 14,
+
+        })
+
+        marker = new Marker({
+            position: coordenadasCajazeiras,
+            title: 'Local do Assalto',
+            map: map,
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            icon: {
+                url: "https://cdn-icons-png.flaticon.com/512/10/10925.png",
+                scaledSize:{width:50, height:50}
+            }
+        })
+        
+        marker.addListener("drag", () =>{
+            const botaoSalvar = document.getElementById('salvar-ocorrencia')
+            const lat = marker.getPosition().lat()
+            const lng = marker.getPosition().lng()
+            const url = `/assaltos/form/${lat}/${lng}`
+            
+            botaoSalvar.href = url
+        })
+
+        marker.addListener('dblclick', () =>{
+            const infowindow = new google.maps.InfoWindow({
+                content: marker.title
+            });
+
+            infowindow.open({
+                anchor: marker,
+                map,
+            });
+        });
+
+    }
+
+    initMap();
+    
+    
+</script>

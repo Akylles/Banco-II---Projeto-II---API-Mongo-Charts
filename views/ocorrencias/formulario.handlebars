@@ -1,0 +1,35 @@
+{{#each erros}}
+  <div class="container alert alert-danger">
+    {{texto}}
+  </div>
+{{else}}
+
+{{/each}}
+<div class="container bg-info mt-3">
+    <h1 class="bg-dark text-light text-center">Informe os dados do assalto</h1>
+  
+    <form method="post" action="/assaltos/salvar/">
+        <div class="mb-3">
+          <label for="Titulo" class="form-label">Titulo</label>
+          <input type="text"
+            class="form-control" name="titulo" id="titulo" aria-describedby="helpId" placeholder="Título da ocorrência">
+          <small id="helpId" class="form-text text-muted">Digite uma descrição da ocorrência</small>
+        </div>
+        <div class="mb-3 col-3">
+          <label for="tipo" class="form-label">Tipo</label>
+          <input type="text"
+            class="form-control" name="tipo" id="tipo" aria-describedby="helpId" placeholder="Tipo">
+          <small id="helpId" class="form-text text-muted">Ex: "assalto", "briga", "estelionato", etc...</small>
+        </div>
+        <div class="mb-3">
+          <label for="data" class="form-label">Data/Hora</label>
+          <input type="datetime-local"
+            class="form-control" name="data" id="data" aria-describedby="helpId" placeholder="">
+          <small id="helpId" class="form-text text-muted">Informe a data e a hora da ocorrência</small>
+        </div>
+        <input type="hidden" name="lat" value="{{lat}}">
+        <input type="hidden" name="lng" value="{{lng}}">
+        <button type="submit" class="btn btn-success mb-2">Registrar</button>
+    </form>
+    
+</div>

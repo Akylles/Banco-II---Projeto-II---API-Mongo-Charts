@@ -1,0 +1,40 @@
+<h1 class="container text-center">Ocorrências registradas</h1>
+<div class="container table-responsive">
+    <table class="table table-striped
+    table-hover	
+    table-borderless
+    table-dark
+    align-middle">
+        <thead class="table-dark">
+            <caption>Ocorrências Cajazeiras</caption>
+            <tr>
+                <th>Titulo</th>
+                <th>Tipo</th>
+                <th>Data e Hora</th>
+                <th>Localização</th>
+                <th>Deletar</th>
+                <th>Editar</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {{#each ocorrencias}}
+                    <tr class="table-primary">
+                        <td scope="row">{{titulo}}</td>
+                        <td>{{tipo}}</td>
+                        <td>{{data}}</td>
+                        <td><a class="btn btn-primary" href="/assaltos/local/{{id}}">Visualizar</a></td>
+                        <td> <a class="btn btn-danger" href="#" role="button">Excluir</a> </td>
+                        <td> <a class="btn btn-success" href="#" role="button">Editar</a> </td>
+                    </tr>
+                {{else}}
+                    <h3>Nenhuma ocorrência registrada ainda no sistema...</h3>
+                {{/each}}
+            </tbody>
+            <tfoot>
+                
+            </tfoot>
+    </table>
+</div>
+<div class="container">
+    <a name="nova-ocorrencia" id="nova-ocorrencia" class="btn btn-success" href="/assaltos/mapa" role="button">Nova Ocorrência</a>    
+</div>
